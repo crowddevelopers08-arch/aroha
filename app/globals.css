@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+/* ============ THEME — change only these per client ============ */
+@theme {
+  /* breakpoints matched to the original template's media queries */
+  --breakpoint-xs: 481px; /* original max-width:480px */
+  --breakpoint-sm: 561px; /* original max-width:560px */
+  --breakpoint-md: 761px; /* original max-width:760px */
+  --breakpoint-lg: 861px; /* original max-width:860px / min-width:861px */
+
+  /* Aroha — from the logo: terracotta wordmark #CC6D50, grey tagline #5A5A5A, black ground */
+  --color-brand: #ad5438; /* terracotta, deepened so white text passes AA */
+  --color-brand-dark: #8a3f29;
+  --color-accent: #cc6d50; /* exact logo terracotta */
+  --color-accent-dark: #ad5438;
+  --color-ink: #241c19;
+  --color-muted: #6b5f5a;
+  --color-line: #ebe1db;
+  --color-soft: #f7e4dc;
+
+  --animate-fade: fade 0.25s;
+  --animate-pop: pop 0.3s;
+  --animate-letter: letter 5s ease-out infinite both;
+  --animate-scale-in: scale-in 0.6s ease-out forwards;
+
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* header wordmark: letters type in one by one, hold, then fade out and repeat */
+  @keyframes letter {
+    0% { opacity: 0; transform: translateY(6px); }
+    8%, 80% { opacity: 1; transform: none; }
+    92%, 100% { opacity: 0; transform: none; }
+  }
+
+  @keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes pop {
+    from { transform: scale(0.94); opacity: 0; }
+    to { transform: none; opacity: 1; }
+  }
+}
+
+@theme inline {
+  --font-body: var(--font-jakarta), Arial, sans-serif;
+  --font-head: var(--font-bricolage), var(--font-jakarta), system-ui, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-letter, .animate-scale-in { animation: none; }
+}
+
+/* ============ Review & feedback pages (/review, /client-feedback) ============ */
+.review {
+  /* Aroha: logo terracotta on a charcoal/black ground (like the logo), warm cream card */
+  --r-ink: #241c19;
+  --r-muted: #6b5f5a;
+  --r-line: #ebe1db;
+  --r-paper: #fbf7f4; /* card */
+  --r-canvas: #ffffff; /* inputs, star tiles */
+  --r-brand: #ad5438; /* buttons, focus rings (white text 5.1:1) */
+  --r-brand-deep: #8a3f29; /* headings */
+  --r-brand-soft: #f7e4dc;
+  --r-backdrop: radial-gradient(120% 70% at 50% 0%, rgb(204 109 80 / 0.3) 0%, transparent 60%),
+    linear-gradient(165deg, #33231e 0%, #1a1412 50%, #0a0807 100%);
+  --r-star: #cc6d50; /* exact logo terracotta */
+  --r-star-deep: #8a3f29;
+  --r-star-soft: #fbeae3;
+  --r-star-line: #efc3b3;
+  font-family: var(--font-jakarta), Arial, sans-serif;
+  color: var(--r-ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+.review h1 { font-family: var(--font-bricolage), var(--font-jakarta), sans-serif; font-weight: 700; letter-spacing: -0.025em; }
+.review :focus-visible { outline: 2px solid var(--r-brand); outline-offset: 3px; border-radius: 4px; }
+.review .r-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border: 1.5px solid transparent;
+  border-radius: 999px;
+  font-size: clamp(0.9375rem, 0.9rem + 0.16vw, 1rem);
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.25s, background 0.25s, color 0.2s, border-color 0.2s;
+}
+.review .r-btn-primary { background: var(--r-brand); color: #fff; box-shadow: 0 12px 28px -12px rgb(173 84 56 / 0.55); }
+.review .r-btn-primary:hover:not(:disabled) {
+  background: var(--r-brand-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 36px -14px rgb(173 84 56 / 0.65);
+}
+.review .r-btn-ghost { background: #fff; color: var(--r-ink); border-color: var(--r-line); }
+.review .r-btn-ghost:hover { border-color: var(--r-brand); color: var(--r-brand-deep); transform: translateY(-2px); }
+
+html {
+  scroll-behavior: smooth;
+}
